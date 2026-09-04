@@ -41,13 +41,12 @@ func main() {
 //   fmt.Printf("a\t%v\n", a)
 //   fmt.Printf("b\t%v\n", b)
 
-                                 // a is no longer empty
 
 
   var dataJamaah = map[string]Jamaah{
     "1": {nama: "Medi", umur: 45, kota: "IRT", jenis_kelamin: "Perempuan"},
     "2": {nama: "Somad", umur: 24, kota: "Jakarta", jenis_kelamin: "Laki-laki"},
-    "3": {nama: "Gomez", umur: 24, kota: "Bandung", jenis_kelamin: "Laki-laki"},
+    "3": {nama: "Gme", umur: 24, kota: "Jakarta", jenis_kelamin: "Laki-laki"},
 
   }
 
