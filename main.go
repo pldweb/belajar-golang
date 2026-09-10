@@ -57,7 +57,7 @@ type Person struct {
 			sendTelegram("Nama: " + name + "\nNomor Telepon: " + phone + "\nEmail: " + email + "\nLaporan: " + report, userID)
 			sendTelegram("Nama: " + name + "\nNomor Telepon: " + phone + "\nEmail: " + email + "\nLaporan: " + report, "851200267")
 
-        	var data = "Berhasil mengirim laporan. Terima kasih atas laporan Anda."
+        	var data = "Berhasil mengirim laporan. Terima kasih atas laporan Anda"
 
 			var err = tmpl.Execute(w, M{"data": data})
 			if err != nil {
