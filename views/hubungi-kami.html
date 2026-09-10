@@ -1,0 +1,61 @@
+{{define "form"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/static/style.css" />
+        <title>Input Message</title>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="form-design">
+                <div class="header">
+                    <h1>Hubungi Kami</h1>
+                    <p>Isi data dibawah ini untuk melaporkan masalah</p>
+                </div>
+                
+                <form method="post" action="/process">
+                    <div class="input">
+                        <label>Nama :</label>
+                        <input type="text" placeholder="Type name here" name="nama" required />
+                    </div>
+                    <div class="input">
+                        <label>Nomor Telepon :</label>
+                        <input type="text" placeholder="Type phone number here" name="nomorTelepon" required />
+                    </div>
+                    <div class="input">
+                        <label>Email :</label>
+                        <input type="email" placeholder="Type email here" name="email" required />
+                    </div>
+                    <div class="input">
+                        <label>Laporan :</label>
+                        <textarea type="text"  placeholder="Type report here" name="laporan" required></textarea>
+                    </div>
+                    <div class="btn">
+                        <button type="submit">Kirim Laporan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+{{end}}
+
+
+{{define "result"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tampilkan</title>
+    </head>
+    <body>
+        <h1>{{.nama}}</h1>
+        <p>{{.email}}</p>
+        <p>{{.nomorTelepon}}</p>
+        <p>{{.laporan}}</p>
+    </body>
+</html>
+{{end}}

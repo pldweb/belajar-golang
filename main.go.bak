@@ -1,0 +1,167 @@
+package main
+
+import (
+	"fmt"
+	"html/template"
+	"net/http"
+)
+
+// func handlerIndex(w http.ResponseWriter, r *http.Request) {
+// 	var message = "Welcome"
+
+// 	w.Write([]byte(message))
+// }
+
+// func handlerHello(w http.ResponseWriter, r *http.Request) {
+// 	var message = "Hello World"
+// 	w.Write([]byte(message))
+// }
+
+type M map[string]interface{}
+
+type Info struct {
+		Affiliation string
+		Address string
+	}
+
+	func (t Info) GetAffiliationDetailInfo() string {
+			return "31 Divisi"
+	}
+
+type Person struct {
+		Name string
+		Gender string
+		Hobbies []string
+		Info	Info
+	}
+
+	func routeIndexGet(w http.ResponseWriter, r *http.Request){
+		if r.Method == "GET" {
+			var tmpl = template.Must(template.New("form").ParseFiles("views/hubungi-kami.html"))
+			var err = tmpl.Execute(w, nil)
+
+			if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			}
+			return
+		}
+		http.Error(w, "", http.StatusBadRequest)
+	}
+
+	func routeSubmitPost(w http.ResponseWriter, r *http.Request){
+		if r.Method == "POST" {
+        	var tmpl = template.Must(template.New("result").ParseFiles("views/hubungi-kami.html"))
+			
+			if err := r.ParseForm(); err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+        	}
+
+			var name = r.FormValue("name")
+        	var message = r.Form.Get("message")
+
+        	var data = map[string]string{"name": name, "message": message}
+
+        	if err := tmpl.Execute(w, data); err != nil {
+            	http.Error(w, err.Error(), http.StatusInternalServerError)
+        	}
+        	return
+		}
+		http.Error(w, "", http.StatusBadRequest)
+	}
+
+func main() {
+	// http.HandleFunc("/", handlerIndex)
+	// http.HandleFunc("/index", handlerIndex)
+	// http.HandleFunc("/hello", handlerHello)
+
+	// http.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
+    //     w.Write([]byte("hello again"))
+    // })
+
+	// http.Handle("/static/",
+	// 	http.StripPrefix("/static/",
+	// 		http.FileServer(http.Dir("assets"))))
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
+		var person = Person{
+			Name: "Rivaldi",
+			Gender: "Laki-laki",
+			Hobbies: []string{"Main Game", "Catur", "Baca Buku"},
+			Info: Info{"Rinkweb Studio", "Bandung"},
+		}
+
+		var tmpl = template.Must(template.ParseFiles(
+			"views/view.html",
+		))
+
+		if err := tmpl.Execute(w, person); 
+		err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
+
+	http.HandleFunc("/hubungi-kami", routeIndexGet)
+	http.HandleFunc("/process", routeSubmitPost)
+	
+
+
+	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case "POST":
+			w.Write([]byte("post"))
+		case "GET":
+			w.Write([]byte("get"))
+		default:
+			http.Error(w, "", http.StatusBadRequest)
+		}
+	})
+
+
+	fmt.Println("Server started at localhost:9000")
+	http.ListenAndServe(":9000", nil)
+
+
+
+
+
+	// http.HandleFunc("/index", func(w http.ResponseWriter, r *http.Request){
+	// 	var data = M{"name" : "Batman"}
+	// 	var tmpl = template.Must(template.ParseFiles(
+	// 		"views/index.html",
+	// 		"views/_header.html",
+	// 		"views/_message.html",
+	// 	))
+
+	// 	var err = tmpl.ExecuteTemplate(w, "index", data)
+	// 	if err != nil {
+	// 		http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	}
+	// })
+
+	// http.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request){
+	// 	var data = M{"name" : "Batman"}
+	// 	var tmpl = template.Must(template.ParseFiles(
+	// 		"views/about.html",
+	// 		"views/_header.html",
+	// 		"views/_message.html",
+	// 	))
+
+
+	// 	var err = tmpl.ExecuteTemplate(w, "about", data)
+	// 	if err != nil {
+	// 		http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	}
+	// })
+
+	// fmt.Println("Server started at localhost:9000")
+	// http.ListenAndServe(":9000", nil)
+
+	// var address = "localhost:9000"
+	// fmt.Printf("Server Started at %s\n", address)
+	// err := http.ListenAndServe(address, nil)
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// }
+
+}

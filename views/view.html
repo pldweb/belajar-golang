@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Learning html/template Actions</title>
+    </head>
+    <body>
+        <table border="1">
+            <tr>
+                <td>{{"Name"}}</td>
+                <td>: {{.Name}}</td>
+            </tr>
+            <tr>
+                <td>{{"Jenis Kelamin"}}</td>
+                {{$gender := .Gender}}
+                <td style="text-transform: capitalize;">: 
+                    {{$gender}}
+                </td>
+            </tr>
+            <tr>
+                <td>{{"Hobi"}}</td>
+                <td>:
+                    {{range $index, $elem := .Hobbies}}
+                        {{$elem}},
+                    {{end}}
+                </td>
+            </tr>
+            <tr>
+                <td>{{"Info"}}</td>
+                <td>: {{.Info.Affiliation}},  ({{.Info.GetAffiliationDetailInfo}})</td>
+            </tr>
+            {{with .Info}}
+            <tr>
+                <td>Address</td>
+                <td>: {{.Address}}</td>
+            </tr>
+            {{end}}
+            {{if eq .Info.Address "Jakarta"}}
+            <tr>
+                <td colspan="2">Kamu di Jakarta yaw</td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="2">Kamu bukan di Jakarta</td>
+            </tr>
+            {{end}}
+        </table>
+    </body>
+</html>
