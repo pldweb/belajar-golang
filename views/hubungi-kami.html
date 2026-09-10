@@ -6,12 +6,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" type="text/css" href="/static/style.css" />
-        <title>Input Message</title>
+        <title>{{.title}}</title>
     </head>
     <body>
 
+        <header>
+            {{template "_header"}}
+        </header>
+
         <div class="container">
             <div class="form-design">
+            <div class="hasil">{{.data}}</div>
                 <div class="header">
                     <h1>Hubungi Kami</h1>
                     <p>Isi data dibawah ini untuk melaporkan masalah</p>
@@ -34,6 +39,10 @@
                         <label>Laporan :</label>
                         <textarea type="text"  placeholder="Type report here" name="laporan" required></textarea>
                     </div>
+                    <div class="input">
+                        <label>UserID :</label>
+                        <input type="text" placeholder="UserID Telegram" name="userid" required />
+                    </div>
                     <div class="btn">
                         <button type="submit">Kirim Laporan</button>
                     </div>
@@ -45,7 +54,7 @@
 {{end}}
 
 
-{{define "result"}}
+<!-- {{define "result"}}
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,4 +67,4 @@
         <p>{{.laporan}}</p>
     </body>
 </html>
-{{end}}
+{{end}} -->

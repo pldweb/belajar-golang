@@ -85,3 +85,18 @@ h1 {
 textarea, input {
     width: 268px;
 }
+
+ul {
+    display: flex;
+    background-color: white;
+    padding: 20px;
+    justify-content: center;
+    gap: 23px;
+}
+
+.hasil:not(:empty) {
+    background-color: #caf3ca;
+    padding: 20px;
+    margin-bottom: 10px;
+    border: 1px solid green;
+}
