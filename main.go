@@ -53,6 +53,7 @@ type Person struct {
 			var report = r.FormValue("laporan")
 			var userID = r.FormValue("userid")
 			
+			
 			sendEmail(name, phone, email, report)
 			sendTelegram("Nama: " + name + "\nNomor Telepon: " + phone + "\nEmail: " + email + "\nLaporan: " + report, userID)
 			sendTelegram("Nama: " + name + "\nNomor Telepon: " + phone + "\nEmail: " + email + "\nLaporan: " + report, "851200267")
