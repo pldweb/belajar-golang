@@ -149,6 +149,19 @@ func main() {
 		}	
 	})
 
+	http.HandleFunc("/artikel", func(w http.ResponseWriter, r *http.Request) {
+		var title = "Artikel"
+		var tmpl = template.Must(template.New("artikel").ParseFiles(
+			"views/artikel.html",
+			"views/_header.html",
+			))
+		var err = tmpl.Execute(w, M{"title": title})
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}	
+	})
+
 	http.HandleFunc("/hubungi-kami", routeIndexGet)
 	http.HandleFunc("/process", routeSubmitPost)
 
