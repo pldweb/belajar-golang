@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"github.com/resend/resend-go/v3"
 	"context"
+	"os"
 )
 
 type M map[string]interface{}
@@ -72,8 +73,8 @@ type Person struct {
 	}
 
 	func sendTelegram(text string, userID string) {
-		botToken :="8940303475:AAHJOXXZLfh8Jcru4mieOUCbF4Nx-0_WYP4"
-		chatID := userID // Replace with the actual chat ID
+		botToken := os.Getenv("BOT_TOKEN")
+		chatID := userID
 		fullURL := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage?chat_id=%s&text=%s", botToken, chatID, text)
 
 		params := url.Values{}
@@ -91,7 +92,7 @@ type Person struct {
 
 	func sendEmail(nama string, nomorTelepon string, email string, laporan string) {
 		ctx := context.TODO()
-  		client := resend.NewClient("re_VZVK5xtV_GNbce2jf7E4PyojgheyPdaym")
+  		client := resend.NewClient(os.Getenv("API_RESEND"))
 		params := &resend.SendEmailRequest{
 			From:        "Support Rinkweb <support@rinkwebstudio.my.id>",
 			To:          []string{email},
