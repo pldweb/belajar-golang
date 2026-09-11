@@ -8,6 +8,8 @@ import (
 	"github.com/resend/resend-go/v3"
 	"context"
 	"os"
+	"github.com/joho/godotenv"
+
 )
 
 type M map[string]interface{}
@@ -109,6 +111,11 @@ type Person struct {
 	}
 
 func main() {
+
+	godotenv.Load(".env")
+
+	fmt.Println("API Resend: ", os.Getenv("API_RESEND"))
+	fmt.Println("Token: ", os.Getenv("BOT_TOKEN"))
 
 	// index
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
