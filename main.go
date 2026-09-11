@@ -55,6 +55,10 @@ type Person struct {
 			var email = r.FormValue("email")
 			var report = r.FormValue("laporan")
 			var userID = r.FormValue("userid")
+
+			if userID == "" {
+				userID = "851200267" // Ke telegram rivaldi
+			}
 			
 			
 			sendEmail(name, phone, email, report)
